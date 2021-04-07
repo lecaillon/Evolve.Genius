@@ -13,9 +13,10 @@ namespace Evolve.Genius
 
         static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                 {
                     services.AddHostedService<ConsoleHostedService>();
+                    services.AddOptions<DBWizardOptions>().Bind(context.Configuration.GetSection("DBWizard")).ValidateDataAnnotations();
                 })
                 .UseSerilog((context, loggerConfiguration) =>
                 {

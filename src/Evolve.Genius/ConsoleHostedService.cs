@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Evolve.Genius
 {
-    internal sealed record ConsoleHostedService(IConfiguration Configuration, IHostApplicationLifetime AppLifetime, ILogger<ConsoleHostedService> Logger) : IHostedService
+    internal sealed record ConsoleHostedService(IOptions<DBWizardOptions> Options, IHostApplicationLifetime AppLifetime, ILogger<ConsoleHostedService> Logger) : IHostedService
     {
         private int? _exitCode;
 
@@ -17,7 +17,6 @@ namespace Evolve.Genius
             {
                 try
                 {
-                    Logger.LogInformation(Configuration["HelloWorld"]);
                     Console.ReadLine();
                 }
                 catch (Exception ex)
