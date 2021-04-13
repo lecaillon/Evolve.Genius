@@ -17,6 +17,9 @@ namespace Evolve.Genius
             {
                 try
                 {
+                    var wizard = new DBWizard(Options.Value, Logger);
+                    wizard.Migrate();
+
                     Console.ReadLine();
                 }
                 catch (Exception ex)
